@@ -1,0 +1,22 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        maven { url 'https://google.bintray.com/exoplayer/' }
+        maven { url 'https://dl.bintray.com/android/android-tools' }
+        maven { url 'https://dl.bintray.com/firebase/gradle/' }
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+//        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.46.1'
+    }
+}
+rootProject.name = "MusicPlayer"
+include ':app'
