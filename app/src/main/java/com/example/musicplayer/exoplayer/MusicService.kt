@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.session.MediaSessionCompat
 import androidx.media.MediaBrowserServiceCompat
+import com.example.musicplayer.exoplayer.callback.MusicPlayerNotificationListener
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.upstream.DefaultDataSource
@@ -19,7 +20,7 @@ import javax.inject.Inject
 private const val SERVICE_TAG = "MusicService"
 
 @AndroidEntryPoint
-class MusicService: MediaBrowserServiceCompat() {
+class MusicService : MediaBrowserServiceCompat() {
 
     @Inject
     lateinit var defaultDataSourceFactory: DefaultDataSource.Factory
@@ -28,13 +29,17 @@ class MusicService: MediaBrowserServiceCompat() {
     lateinit var exoPlayer: ExoPlayer
 
     private val serviceJob = Job()
+
     // Dispatchers.Main + serviceJob means we are going to merge scope of Main and serviceJob
     private val serviceScope = CoroutineScope(Dispatchers.Main + serviceJob)
 
     // contains information regarding session
     private lateinit var mediaSession: MediaSessionCompat
+
     // this will be used to connent to the mediaSession
     private lateinit var mediaSessionConnector: MediaSessionConnector
+    private lateinit var musicNotificationManager: MusicNotificationManager
+    var isForegroundService = false
 
     override fun onCreate() {
         super.onCreate()
@@ -49,6 +54,11 @@ class MusicService: MediaBrowserServiceCompat() {
         }
 
         sessionToken = mediaSession.sessionToken
+        musicNotificationManager = MusicNotificationManager(
+            this,
+            mediaSession.sessionToken,
+            MusicPlayerNotificationListener(this)
+        ) {}
         mediaSessionConnector = MediaSessionConnector(mediaSession)
         mediaSessionConnector.setPlayer(exoPlayer)
     }
