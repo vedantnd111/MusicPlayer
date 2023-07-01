@@ -23,9 +23,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class FirebaseMusicStore @Inject constructor(private val musicDatabase: MusicDatabase) {
+class FirebaseMusicSource @Inject constructor(private val musicDatabase: MusicDatabase) {
 
-    private var songs = emptyList<MediaMetadataCompat>()
+    var songs = emptyList<MediaMetadataCompat>()
 
     /**
      * This method will fetch us list of songs from firebase
