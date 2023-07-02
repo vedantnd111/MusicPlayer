@@ -82,7 +82,7 @@ class MusicNotificationManager(
                         callback.onBitmap(resource)
                     }
 
-                    override fun onLoadCleared(placeholder: Drawable?)=Unit
+                    override fun onLoadCleared(placeholder: Drawable?) = Unit
 
                 })
             return null

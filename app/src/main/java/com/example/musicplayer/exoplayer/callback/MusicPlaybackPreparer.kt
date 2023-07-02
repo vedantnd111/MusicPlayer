@@ -36,7 +36,7 @@ class MusicPlaybackPreparer(
     override fun onPrepareFromMediaId(mediaId: String, playWhenReady: Boolean, extras: Bundle?) {
         firebaseMusicSource.whenReady {
             val itemToPlay = firebaseMusicSource.songs.find { mediaId == it.description.mediaId }
-             playerPrepared(itemToPlay)
+            playerPrepared(itemToPlay)
         }
     }
 

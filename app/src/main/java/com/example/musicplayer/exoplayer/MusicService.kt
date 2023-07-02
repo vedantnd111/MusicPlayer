@@ -80,8 +80,12 @@ class MusicService : MediaBrowserServiceCompat() {
 
     }
 
-    private fun preparePlayer(songs:List<MediaMetadataCompat>, itemToPlay: MediaMetadataCompat?, playNow: Boolean) {
-        val currSong = if(currPlayingSong == null) 0 else songs.indexOf(itemToPlay)
+    private fun preparePlayer(
+        songs: List<MediaMetadataCompat>,
+        itemToPlay: MediaMetadataCompat?,
+        playNow: Boolean
+    ) {
+        val currSong = if (currPlayingSong == null) 0 else songs.indexOf(itemToPlay)
         exoPlayer.prepare(firebaseMusicSource.asMediaSource(dataSourceFactory = defaultDataSourceFactory))
         exoPlayer.seekTo(currSong, 0L)
         exoPlayer.playWhenReady = playNow

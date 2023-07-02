@@ -21,8 +21,8 @@ import javax.inject.Singleton
 object AppModule {
 
     /**
-     * We need to mark this method with @singleton so that we don't end up creating many instances of glide
-     * due to this code we'll have single instance of glide throughout application lifespan
+     * We need to mark this method with @singleton so that we don't end up creating many instances of glide.
+     * due to this code we'll have single instance of glide throughout application lifespan.
      */
     @Singleton
     @Provides
