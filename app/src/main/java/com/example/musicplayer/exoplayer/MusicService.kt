@@ -9,6 +9,7 @@ import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import androidx.media.MediaBrowserServiceCompat
 import com.example.musicplayer.data.other.Constants.MEDIA_ROOT_ID
+import com.example.musicplayer.data.other.Constants.NETWORK_ERROR
 import com.example.musicplayer.exoplayer.callback.MusicPlaybackPreparer
 import com.example.musicplayer.exoplayer.callback.MusicPlayerEventListener
 import com.example.musicplayer.exoplayer.callback.MusicPlayerNotificationListener
@@ -149,6 +150,7 @@ class MusicService : MediaBrowserServiceCompat() {
                             isPlayerInitialized = true
                         }
                     } else {
+                        mediaSession.sendSessionEvent(NETWORK_ERROR, null)
                         result.sendResult(null)
                     }
                 }
