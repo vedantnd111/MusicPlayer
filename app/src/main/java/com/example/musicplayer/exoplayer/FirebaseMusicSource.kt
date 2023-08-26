@@ -34,8 +34,13 @@ class FirebaseMusicSource @Inject constructor(private val musicDatabase: MusicDa
      *
      * And as it is a database operation we do it on IO thread for not blocking main thread
      */
-    suspend fun fetchMediaData() = withContext(Dispatchers.IO) {
+    suspend fun fetchMediaData() {
         state = State.STATE_INITIALIZING
+        getAllSongs()
+        state = State.STATE_INITIALIZED
+    }
+
+    suspend fun getAllSongs() = withContext(Dispatchers.IO) {
         val allSongs = musicDatabase.getAllSongs()
         songs = allSongs.map { song ->
             MediaMetadataCompat.Builder()
@@ -51,7 +56,6 @@ class FirebaseMusicSource @Inject constructor(private val musicDatabase: MusicDa
                 .putString(METADATA_KEY_DISPLAY_DESCRIPTION, song.subtitle)
                 .build()
         }
-        state = State.STATE_INITIALIZED
     }
 
     /**

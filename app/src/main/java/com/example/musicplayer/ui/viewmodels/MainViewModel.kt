@@ -13,9 +13,11 @@ import com.example.musicplayer.exoplayer.MusicServiceConnection
 import com.example.musicplayer.exoplayer.isPlayEnabled
 import com.example.musicplayer.exoplayer.isPlaying
 import com.example.musicplayer.exoplayer.isPrepared
-import dagger.hilt.android.scopes.ViewModelScoped
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MainViewModel @ViewModelScoped constructor(val musicServiceConnection: MusicServiceConnection) :
+@HiltViewModel
+class MainViewModel @Inject constructor(val musicServiceConnection: MusicServiceConnection) :
     ViewModel() {
 
     private val _mediaItems = MutableLiveData<Resource<List<Song>>>()
