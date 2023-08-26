@@ -41,8 +41,8 @@ class MainViewModel @Inject constructor(val musicServiceConnection: MusicService
                         it.description.title.toString(),
                         it.description.subtitle.toString(),
                         it.mediaId!!,
-                        it.description.mediaUri.toString(),
-                        it.description.iconUri.toString()
+                        it.description.iconUri.toString(),
+                        it.description.mediaUri.toString()
                     )
                 }
                 _mediaItems.postValue(Resource.success(items))
