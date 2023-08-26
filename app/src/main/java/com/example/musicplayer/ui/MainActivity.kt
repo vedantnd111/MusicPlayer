@@ -4,6 +4,10 @@ import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.bumptech.glide.RequestManager
 import com.example.musicplayer.R
@@ -17,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.ivCurSongImage
 import kotlinx.android.synthetic.main.activity_main.ivPlayPause
+import kotlinx.android.synthetic.main.activity_main.navHostFragment
 import kotlinx.android.synthetic.main.activity_main.rootLayout
 import kotlinx.android.synthetic.main.activity_main.vpSong
 import javax.inject.Inject
@@ -51,13 +56,29 @@ class MainActivity : AppCompatActivity() {
         vpSong.registerOnPageChangeCallback(object : OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                if(playbackState?.isPlaying == true) {
+                if (playbackState?.isPlaying == true) {
                     mainViewModels.playOrToggleSong(swipeSongAdapter.songs[position])
                 } else {
                     currPlayingSong = swipeSongAdapter.songs[position]
                 }
             }
         })
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+
+        val navController = navHostFragment.navController
+
+        swipeSongAdapter.setItemClickListener {
+            navController.navigate(R.id.globalActionToSongFragment)
+        }
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.songFragment -> hideBottomBar()
+                R.id.homeFragment -> showBottomBar()
+                else -> showBottomBar()
+            }
+        }
     }
 
     private fun switchViewPagerToCurrPlayingSong(song: Song) {
@@ -130,5 +151,17 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun hideBottomBar() {
+        ivCurSongImage.isVisible = false
+        vpSong.isVisible = false
+        ivPlayPause.isVisible = false
+    }
+
+    private fun showBottomBar() {
+        ivCurSongImage.isVisible = true
+        vpSong.isVisible = true
+        ivPlayPause.isVisible = true
     }
 }
