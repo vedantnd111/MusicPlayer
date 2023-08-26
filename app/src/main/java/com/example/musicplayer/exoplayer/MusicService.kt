@@ -10,9 +10,11 @@ import android.support.v4.media.session.MediaSessionCompat
 import androidx.media.MediaBrowserServiceCompat
 import com.example.musicplayer.data.other.Constants.MEDIA_ROOT_ID
 import com.example.musicplayer.data.other.Constants.NETWORK_ERROR
+import com.example.musicplayer.data.other.Constants.SECOND
 import com.example.musicplayer.exoplayer.callback.MusicPlaybackPreparer
 import com.example.musicplayer.exoplayer.callback.MusicPlayerEventListener
 import com.example.musicplayer.exoplayer.callback.MusicPlayerNotificationListener
+import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
@@ -82,7 +84,9 @@ class MusicService : MediaBrowserServiceCompat() {
             mediaSession.sessionToken,
             MusicPlayerNotificationListener(this)
         ) {
-            currSongDuration = exoPlayer.duration
+            if(exoPlayer.duration != C.TIME_UNSET) {
+                currSongDuration = exoPlayer.duration
+            }
         }
 
         val musicPlaybackPreparer = MusicPlaybackPreparer(firebaseMusicSource) {
