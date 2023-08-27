@@ -27,6 +27,22 @@ class FirebaseMusicSource @Inject constructor(private val musicDatabase: MusicDa
 
     var songs = emptyList<MediaMetadataCompat>()
 
+    private val onReadyListeners = mutableListOf<(Boolean) -> Unit>()
+    private var state: State = State.STATE_CREATED
+        set(value) {
+            if (value == State.STATE_INITIALIZED || value == State.STATE_ERROR) {
+                // this is done for thread safety purpose
+                synchronized(onReadyListeners) {
+                    field = value
+                    onReadyListeners.forEach { listener ->
+                        listener(state == State.STATE_INITIALIZED)
+                    }
+                }
+            } else {
+                field = value
+            }
+        }
+
     /**
      * This method will fetch us list of songs from firebase
      * this songs will be of Song datatype so we've to convert them to MediaMetadataCompat
@@ -86,22 +102,6 @@ class FirebaseMusicSource @Inject constructor(private val musicDatabase: MusicDa
             .build()
         MediaBrowserCompat.MediaItem(desc, FLAG_PLAYABLE)
     }.toMutableList()
-
-    private val onReadyListeners = mutableListOf<(Boolean) -> Unit>()
-    private var state: State = State.STATE_CREATED
-        set(value) {
-            if (value == State.STATE_INITIALIZED || value == State.STATE_ERROR) {
-                // this is done for thread safety purpose
-                synchronized(onReadyListeners) {
-                    field = value
-                    onReadyListeners.forEach { listener ->
-                        listener(state == State.STATE_INITIALIZED)
-                    }
-                }
-            } else {
-                field = value
-            }
-        }
 
     fun whenReady(action: (Boolean) -> Unit): Boolean {
         return if (state == State.STATE_INITIALIZING || state == State.STATE_CREATED) {

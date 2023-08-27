@@ -5,8 +5,6 @@ import android.support.v4.media.session.PlaybackStateCompat
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.bumptech.glide.RequestManager
@@ -21,7 +19,6 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.ivCurSongImage
 import kotlinx.android.synthetic.main.activity_main.ivPlayPause
-import kotlinx.android.synthetic.main.activity_main.navHostFragment
 import kotlinx.android.synthetic.main.activity_main.rootLayout
 import kotlinx.android.synthetic.main.activity_main.vpSong
 import javax.inject.Inject
@@ -29,6 +26,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    // We have initialized MainViewModel this way because we want to bind it to the lifecycle of MainActivity
     private val mainViewModels: MainViewModel by viewModels()
 
     @Inject

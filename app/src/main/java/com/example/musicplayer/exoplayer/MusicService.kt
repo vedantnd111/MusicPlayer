@@ -10,7 +10,6 @@ import android.support.v4.media.session.MediaSessionCompat
 import androidx.media.MediaBrowserServiceCompat
 import com.example.musicplayer.data.other.Constants.MEDIA_ROOT_ID
 import com.example.musicplayer.data.other.Constants.NETWORK_ERROR
-import com.example.musicplayer.data.other.Constants.SECOND
 import com.example.musicplayer.exoplayer.callback.MusicPlaybackPreparer
 import com.example.musicplayer.exoplayer.callback.MusicPlayerEventListener
 import com.example.musicplayer.exoplayer.callback.MusicPlayerNotificationListener
@@ -30,6 +29,11 @@ import javax.inject.Inject
 
 private const val SERVICE_TAG = "MusicService"
 
+/**
+ * This class contains all the code related to the service which will run is background of the app.
+ * We've inherited this class from [MediaBrowserServiceCompat] not from [Service] because
+ * [MediaBrowserServiceCompat] is used for media related stuff in service.
+ */
 @AndroidEntryPoint
 class MusicService : MediaBrowserServiceCompat() {
 
@@ -55,7 +59,7 @@ class MusicService : MediaBrowserServiceCompat() {
     // contains information regarding session
     private lateinit var mediaSession: MediaSessionCompat
 
-    // this will be used to connent to the mediaSession
+    // this will be used to connect to the mediaSession
     private lateinit var mediaSessionConnector: MediaSessionConnector
     private lateinit var musicNotificationManager: MusicNotificationManager
     private lateinit var musicPlayerEventListener: MusicPlayerEventListener
@@ -136,7 +140,7 @@ class MusicService : MediaBrowserServiceCompat() {
         clientPackageName: String,
         clientUid: Int,
         rootHints: Bundle?
-    ): BrowserRoot? {
+    ): BrowserRoot {
         return BrowserRoot(MEDIA_ROOT_ID, null)
     }
 

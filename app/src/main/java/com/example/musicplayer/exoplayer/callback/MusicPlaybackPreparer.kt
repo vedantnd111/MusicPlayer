@@ -10,8 +10,8 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 
 /**
- * firebaseMusicSource      instance of FirebaseMusicSource
- * playerPrepared           lambda function it will take MediaMetadataCompat of song which its going to play
+ * firebaseMusicSource      instance of [FirebaseMusicSource]
+ * playerPrepared           lambda function it will take [MediaMetadataCompat] of song which its going to play
  */
 class MusicPlaybackPreparer(
     private val firebaseMusicSource: FirebaseMusicSource,

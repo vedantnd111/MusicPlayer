@@ -18,7 +18,7 @@ import com.google.android.exoplayer2.ui.PlayerNotificationManager.NotificationLi
 
 /**
  * context                  Context
- * sessionToken             session toke of media session compat, we'll recive it from FirebaseMusicStore
+ * sessionToken             session toke of media session compat, we'll receive it from FirebaseMusicStore
  * notificationListener     to listen actions on the notification (play, pause, next, previous)
  * newSongCallback          to determine when the new song starts playing, it can be used to updated current duration of the song
  */
