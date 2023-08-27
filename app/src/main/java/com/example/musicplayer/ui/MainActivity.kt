@@ -98,7 +98,12 @@ class MainActivity : AppCompatActivity() {
                                 glide.load((currPlayingSong ?: songs[0].imageUrl))
                                     .into(ivCurSongImage)
                             }
-                            switchViewPagerToCurrPlayingSong(currPlayingSong ?: return@observe)
+                            // not sure about commenting it. I think each time when viewLifecycleOwner updates
+                            // mainViewModels.mediaItems and mainViewModels.currPlayingSong observers on this livedata will be executed
+                            // and mainViewModels.currPlayingSong is the right place to call switchViewPagerToCurrPlayingSong()
+                            // calling it here will not make any difference.
+
+                            // switchViewPagerToCurrPlayingSong(currPlayingSong ?: return@observe)
                         }
                     }
 
