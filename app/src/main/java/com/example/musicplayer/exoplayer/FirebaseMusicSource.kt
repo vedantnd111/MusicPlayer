@@ -56,7 +56,7 @@ class FirebaseMusicSource @Inject constructor(private val musicDatabase: MusicDa
         state = State.STATE_INITIALIZED
     }
 
-    suspend fun getAllSongs() = withContext(Dispatchers.IO) {
+    private suspend fun getAllSongs() = withContext(Dispatchers.IO) {
         val allSongs = musicDatabase.getAllSongs()
         songs = allSongs.map { song ->
             MediaMetadataCompat.Builder()
@@ -76,6 +76,8 @@ class FirebaseMusicSource @Inject constructor(private val musicDatabase: MusicDa
 
     /**
      * this will be a list of playable songs
+     * It contains information for Exoplayer from where it can stream actual media.
+     * We pass this media data to the exoplayer
      */
     fun asMediaSource(dataSourceFactory: DefaultDataSource.Factory): ConcatenatingMediaSource {
         val concatenatingMediaSource = ConcatenatingMediaSource()

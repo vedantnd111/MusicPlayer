@@ -107,6 +107,9 @@ class MusicService : MediaBrowserServiceCompat() {
         musicNotificationManager.showNotification(exoPlayer)
     }
 
+    /**
+     * This class is required to propagate info to the notifications.
+     */
     private inner class MusicQueueNavigator: TimelineQueueNavigator(mediaSession) {
         override fun getMediaDescription(player: Player, windowIndex: Int): MediaDescriptionCompat {
             return firebaseMusicSource.songs[windowIndex].description
