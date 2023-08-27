@@ -21,3 +21,4 @@ MusicPlayer using glide, exo-player and dagger-hilt
 - `MediaControllerCompat` is invoked in `MediaBrowserCompatConnectionCallback.onConnected()`.
 - `MediaControllerCompat` Allows an app to interact with an ongoing media session. Media buttons and other commands can be sent to the session. A callback may be registered to receive updates from the session, such as metadata and play state changes.
 - `MediaControllerCallback` we listen to app interactions such as onPlaybackStateChanged, onMetadataChanged, etc. Abd update our ui accordingly.
+![Uploading Screenshot_1693050738.png…]()
