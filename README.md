@@ -1,6 +1,12 @@
 # MusicPlayer
 MusicPlayer using glide, exo-player and dagger-hilt
 
+# App:
+![Screenshot_1693050757](https://github.com/vedantnd111/MusicPlayer/assets/48761376/4f4aef29-5030-428f-b9f0-278efeece1c3)
+![Screenshot_1693050748](https://github.com/vedantnd111/MusicPlayer/assets/48761376/b5331d2c-6b49-4ef1-baa5-2f2a94afadd4)
+![Screenshot_1693050738](https://github.com/vedantnd111/MusicPlayer/assets/48761376/916e1ac8-33f9-454f-b80a-13bb841092c5)
+
+
 
 # Layout:
 
@@ -21,5 +27,7 @@ MusicPlayer using glide, exo-player and dagger-hilt
 - `MediaControllerCompat` is invoked in `MediaBrowserCompatConnectionCallback.onConnected()`.
 - `MediaControllerCompat` Allows an app to interact with an ongoing media session. Media buttons and other commands can be sent to the session. A callback may be registered to receive updates from the session, such as metadata and play state changes.
 - `MediaControllerCallback` we listen to app interactions such as onPlaybackStateChanged, onMetadataChanged, etc. And update our ui accordingly.
+
+Architecture:
 
 ![music_player](https://github.com/vedantnd111/MusicPlayer/assets/48761376/d1550bf7-a4f7-4ea2-8b9a-9ac8488785ea)
