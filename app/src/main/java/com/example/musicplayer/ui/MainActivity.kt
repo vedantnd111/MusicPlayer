@@ -16,6 +16,11 @@ import com.example.musicplayer.exoplayer.isPlaying
 import com.example.musicplayer.exoplayer.toSong
 import com.example.musicplayer.ui.viewmodels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.FirebaseApp
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.ivCurSongImage
 import kotlinx.android.synthetic.main.activity_main.ivPlayPause
@@ -28,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     // We have initialized MainViewModel this way because we want to bind it to the lifecycle of MainActivity
     private val mainViewModels: MainViewModel by viewModels()
+    private lateinit var fiebaseAnalytics: FirebaseAnalytics
 
     @Inject
     lateinit var swipeSongAdapter: SwipeSongAdapter
@@ -42,8 +48,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         subscribeToObservers()
+        FirebaseApp.initializeApp(applicationContext)
+        fiebaseAnalytics = Firebase.analytics
 
         vpSong.adapter = swipeSongAdapter
+        fiebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM) {
+            param(FirebaseAnalytics.Param.ITEM_ID, 0)
+            param(FirebaseAnalytics.Param.ITEM_NAME, "tjmm")
+            param(FirebaseAnalytics.Param.CONTENT_TYPE, "song")
+        }
 
         ivPlayPause.setOnClickListener {
             currPlayingSong?.let {

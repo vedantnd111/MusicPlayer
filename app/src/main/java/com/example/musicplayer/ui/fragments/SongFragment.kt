@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.RequestManager
 import com.example.musicplayer.R
 import com.example.musicplayer.data.entities.Song
-import com.example.musicplayer.data.other.Constants.SECOND
+//import com.example.musicplayer.data.other.Constants.SECOND
 import com.example.musicplayer.data.other.Status
 import com.example.musicplayer.exoplayer.isPlaying
 import com.example.musicplayer.exoplayer.toSong
